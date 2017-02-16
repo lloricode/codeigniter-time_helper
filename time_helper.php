@@ -94,6 +94,10 @@ if (!function_exists('convert_24_to_12hrs'))
          */
         function convert_24_to_12hrs($hr24 = NULL)
         {
+                if (!strpos($hr24, ':'))
+                {
+                        return 'invalid time format.';
+                }
                 if (empty($hr24) || is_null($hr24))
                 {
                         return;
@@ -107,8 +111,9 @@ if (!function_exists('convert_24_to_12hrs'))
                         $ap = 'PM';
                 }
 
-                return $hh . ':' . $mm . ' ' . $ap;
+                return str_pad($hh, 2, '0', STR_PAD_LEFT) . ':' . str_pad($mm, 2, '0', STR_PAD_LEFT) . ' ' . $ap;
         }
 
 }
+
 
