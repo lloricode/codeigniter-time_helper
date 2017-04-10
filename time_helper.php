@@ -2,12 +2,12 @@
 
 defined('BASEPATH') or exit('no direct script allowed');
 
-if (!function_exists('time_list'))
+if ( ! function_exists('time_list'))
 {
 
         /**
          * 
-         * create and array or time, depend on parameters given, 
+         * create and array for time, depend on parameters given, 
          * 
          * return will be key is 24rhs,value is 12 hrs
          * 
@@ -20,10 +20,13 @@ if (!function_exists('time_list'))
          * @return array
          * @author Lloric Mayuga Garcia <emorickfighter@gmail.com>
          */
-        function time_list($start = '06:00', $end = '18:30', $hours_incrementation = 1, $minute_incrementation = 30)
+        function time_list($tmp = TRUE, $start = '06:00', $end = '18:30', $hours_incrementation = 1, $minute_incrementation = 30)
         {
-                $arr [''] = 'Time';
-
+                $arr = array();
+                if ($tmp)
+                {
+                        $arr [''] = 'Time';
+                }
                 /**
                  * explode value, assuming value parameter is valid,so make sure, parameter has valid value,
                  * its ok, only developer will set this, not user
@@ -80,7 +83,9 @@ if (!function_exists('time_list'))
 
 }
 
-if (!function_exists('convert_24_to_12hrs'))
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('convert_24_to_12hrs'))
 {
 
         /**
@@ -94,20 +99,20 @@ if (!function_exists('convert_24_to_12hrs'))
          */
         function convert_24_to_12hrs($hr24 = NULL)
         {
-                if (!strpos($hr24, ':'))
+                if ( ! strpos($hr24, ':'))
                 {
                         return 'invalid time format.';
                 }
-                if (empty($hr24) || is_null($hr24))
+                if (empty($hr24) OR is_null($hr24))
                 {
                         return;
                 }
                 $ap = 'AM';
                 list($hh, $mm) = explode(':', $hr24);
 
-                if ($hh > 12)
+                if ($hh >= 12)
                 {
-                        $hh -= 12;
+                        $hh -= ($hh == 12) ? 0 : 12;
                         $ap = 'PM';
                 }
 
