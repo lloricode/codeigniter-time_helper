@@ -121,4 +121,41 @@ if ( ! function_exists('convert_24_to_12hrs'))
 
 }
 
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('convert_12_to_24hrs'))
+{
+
+        function convert_12_to_24hrs($hr12 = NULL)
+        {
+//                if (!strpos($hr24, ':') OR !strpos($hr24, ' ') OR !strpos($hr24, 'M'))
+//                {
+//                        return 'invalid time format.';
+//                }
+                list($time, $ap) = explode(' ', $hr12);
+                list($hh, $mm) = explode(':', $time);
+                if ($ap == 'PM')
+                {
+                        $hh += 12;
+                }
+                return $hh . ':' . $mm;
+        }
+
+}
+
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('convert_24hrs_to_seconds'))
+{
+
+        function convert_24hrs_to_seconds($hr24)
+        {
+                list($hh, $mm) = explode(':', $hr24);
+                $sec = 0;
+                $sec += ($hh * 60 * 60);
+                $sec += ($mm * 60);
+                return (int) $sec;
+        }
+
+}
 
